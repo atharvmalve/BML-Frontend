@@ -22,7 +22,7 @@ class ChatWidget extends HTMLElement {
         }
       </style>
 
-      <iframe class="chat-frame" src="/index.html"></iframe>
+      <iframe class="chat-frame" src="/"></iframe>
     `;
   }
 }
