@@ -523,23 +523,24 @@
         }
 
         // --- UI Logic ---
-        function toggleChat() {
-            isOpen = !isOpen;
-            if (isOpen) {
-                panel.classList.add('open');
-                badge.style.display = 'none'; // Clear notification
-                setTimeout(() => input.focus(), 300); // Focus input after animation
-                notificationPreview = document.getElementById('notification-preview');
-notificationPreview.style.display = 'none';
+      function toggleChat() {
+    isOpen = !isOpen;
+    if (isOpen) {
+        panel.classList.add('open');
+        toggleBtn.style.display = 'none'; // Hide button when chat is open
+        badge.style.display = 'none'; // Hide notification badge
+        document.getElementById('notification-preview').style.display = 'none';
+        setTimeout(() => input.focus(), 300); // Focus input after animation
 
-                // If no session, try init again just in case
-                if(!sessionId) init();
-                
-                scrollToBottom();
-            } else {
-                panel.classList.remove('open');
-            }
-        }
+        // If no session, try init again just in case
+        if (!sessionId) init();
+        
+        scrollToBottom();
+    } else {
+        panel.classList.remove('open');
+        toggleBtn.style.display = 'flex'; // Show button when chat is closed
+    }
+}
 
         toggleBtn.addEventListener('click', toggleChat);
         closeBtn.addEventListener('click', toggleChat);
