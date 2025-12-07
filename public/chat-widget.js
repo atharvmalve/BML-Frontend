@@ -22,7 +22,7 @@ class ChatWidget extends HTMLElement {
         }
       </style>
 
-      <iframe class="chat-frame" src="https://bml-frontend-eta.vercel.app/index.html"></iframe>
+      <iframe class="chat-frame" src="/index.html"></iframe>
     `;
   }
 }
