@@ -131,34 +131,37 @@
     }
 }
 
-        /* Chat Panel */
-        #chat-panel {
-            width: 380px;
-            height: 600px;
-            max-height: 80vh;
-            background-color: var(--bg-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            margin-bottom: 16px;
-            pointer-events: auto;
-            
-            /* Animation State */
-            transform-origin: bottom right;
-            transform: scale(0);
-            opacity: 0;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-            position: absolute; /* Stack over button area effectively */
-            bottom: 70px; /* Above button */
-            right: 0;
-        }
+#chat-panel {
+    width: 380px;
+    height: 600px;
+    max-height: 80vh;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 16px;
+    pointer-events: auto;
 
-        #chat-panel.open {
-            transform: scale(1);
-            opacity: 1;
-        }
+    transform-origin: bottom right;
+    transform: scale(0.8); /* start slightly smaller */
+    opacity: 0;
+    bottom: 20px; /* start at button position */
+    position: absolute;
+    right: 0;
+
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                bottom 0.3s ease;
+}
+
+#chat-panel.open {
+    transform: scale(1);
+    opacity: 1;
+    bottom: 70px; /* final position above button */
+}
+
 
         /* Header */
         .chat-header {
@@ -523,22 +526,18 @@
         }
 
         // --- UI Logic ---
-      function toggleChat() {
+ function toggleChat() {
     isOpen = !isOpen;
     if (isOpen) {
+        toggleBtn.style.display = 'none'; // hide button
         panel.classList.add('open');
-        toggleBtn.style.display = 'none'; // Hide button when chat is open
-        badge.style.display = 'none'; // Hide notification badge
         document.getElementById('notification-preview').style.display = 'none';
-        setTimeout(() => input.focus(), 300); // Focus input after animation
-
-        // If no session, try init again just in case
+        setTimeout(() => input.focus(), 300);
         if (!sessionId) init();
-        
         scrollToBottom();
     } else {
         panel.classList.remove('open');
-        toggleBtn.style.display = 'flex'; // Show button when chat is closed
+        toggleBtn.style.display = 'flex'; // show button again
     }
 }
 
